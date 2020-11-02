@@ -36,3 +36,5 @@ class HRPayslipAze(models.Model):
                 rec.timeoff_rate = rate
             else:
                 rec.timeoff_rate = 0
+                
+                
