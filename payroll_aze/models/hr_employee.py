@@ -1,19 +1,18 @@
 from odoo import models, fields, api
 from datetime import date, datetime
 
-class HREmployeeExperience(models.Model):
-    _name = 'hr.employee.experience'
-    _description = 'Employee work experience'
-    
-    name = fields.Char(string="Company name", required=True)
-    employee_id = fields.Many2one('hr.employee',string="Employee", required=True)
-    date_from = fields.Date(string="Start date:", required=True)
-    date_to = fields.Date(string="End date:")
-    current = fields.Boolean(string="Current Employer")
-    
-
 class HREmployeeInherit(models.Model):
     _inherit = "hr.employee"
 
-    work_experience_ids = fields.One2many('hr.employee.experience', 'employee_id', string="Work Experience")
+    current_experience = fields.Float(string="Current experience",digits=(12,2), compute="_calculate_current_experience")
     
+    def _calculate_current_experience(self):
+        for rec in self:
+            contracts = self.env['hr.contract'].search([('employee_id','=', rec.id),('state', 'in', ('open','close'))])
+            if contracts:
+                oldest_contract = contracts.sorted(key=lambda r: r.date_start)[0]
+                experience_in_days = (date.today() - oldest_contract.date_start).days
+                exp_in_years = experience_in_days / 365
+                rec.current_experience = exp_in_years
+            else:
+                rec.current_experience = 0

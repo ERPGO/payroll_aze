@@ -8,15 +8,8 @@
             <field name="inherit_id" ref="hr.view_employee_form" />
             <field name="arch" type="xml">
                 <data>
-              <xpath expr="//form[1]/sheet[1]/notebook[1]" position="after">
-                <field name="work_experience_ids" context="{'default_employee_id': active_id}">
-                  <tree string="Employee work experience" editable="top">
-                    <field name="employee_id"/>
-                    <field name="name"/>
-                    <field name="date_from"/>
-                    <field name="date_to"/>
-                    <field name="current"/>
-                  </tree>
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="current_experience">
                 </field>
               </xpath>
                 </data>
