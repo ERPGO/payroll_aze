@@ -1,0 +1,70 @@
+id,name,code,category_id,amount_select,condition_select,condition_python,sequence,amount_python_compute
+az_basic,Hesablanmış maaş,BASIC,Basic,code,none,"
+                    result = rules.NET > categories.NET * 0.10",1,"if payslip.worked_days_line_ids and worked_days.WORK100:
+  prorata = worked_days.WORK100.number_of_days / payslip.working_days
+  result = contract.wage * prorata
+else:
+  result = 0"
+az_toff,Hesablanmış məzuniyyət,TOFF,Basic,code,python,"
+result = True if payslip.worked_days_line_ids and worked_days.LEAVE120 else False
+",5,"#for line in payslip.worked_days_line_ids:
+#  if line.work_entry_type_id.code == ""LEAVE120"":
+#    result = line.number_of_days * payslip.timeoff_rate
+result = worked_days.LEAVE120.number_of_days * payslip.timeoff_rate"
+az_sck,Hesablanmış xəstəlik,SCK,Allowance,code,python,"
+result = True if payslip.worked_days_line_ids and worked_days.LEAVE110 else False",6,"def _return_exp_perc(exp_years):
+    if 8 <= exp_years < 12:
+        exp_perc = 0.8
+    elif exp_years >= 12:
+        exp_perc = 1
+    else:
+        exp_perc = 0.6
+    return exp_perc
+
+employee_experience_perc = _return_exp_perc(employee.current_experience)
+
+result = payslip.sickleave_rate  *  employee_experience_perc * worked_days.LEAVE110.number_of_days"
+az_lfi,Həyat yığım sığortası,LFI,Allowance,code,python,"
+result = True if contract.life_insurance_amount > 0 else False",7,"
+result = -contract.life_insurance_amount"
+az_gross,Gross maaş,GROSS,Gross,code,none,"
+                    result = rules.NET > categories.NET * 0.10",100,result = categories.BASIC + categories.ALW
+az_gross_sck,Xəstəlik hesablanması üçün Gross,GROSS_SCK,Gross for sick leave calculation,code,none,"
+                    result = rules.NET > categories.NET * 0.10",101,"try:
+  SCK
+except:
+  SCK = 0
+
+try:
+  LFI
+except:
+  LFI = 0
+
+total = categories.GROSS - LFI - SCK
+if total > 2 * contract.wage:
+  result = 2 * contract.wage
+else:
+  result = total"
+az_tax,Gəlir vergisi,TAX,Deduction,code,none,"
+                    result = rules.NET > categories.NET * 0.10",105,"if categories.GROSS > 8000:
+ result = (categories.GROSS - 8000) * 0.14
+else:
+ result = 0"
+az_eepen,İşçi DSMF (3%),EEPEN,Deduction,code,none,"
+                    result = rules.NET > categories.NET * 0.10",106,"if categories.GROSS < 200:
+ result = categories.GROSS * 0.03
+else:
+ result = 6 + (categories.GROSS - 200) * 0.10"
+az_eeui,İşçi işsizlik sığortası (0.5%),EEUI,Deduction,percentage,none,"
+                    result = rules.NET > categories.NET * 0.10",107,"
+                    result = contract.wage * 0.10"
+az_net,Net Salary,NET,Net,code,none,"
+                    result = rules.NET > categories.NET * 0.10",200,result = categories.BASIC + categories.ALW - categories.DED
+az_erspf,İşə götürən DSMF (22%),ERSPF,Company Contribution,code,none,"
+                    result = rules.NET > categories.NET * 0.10",210,"if categories.GROSS < 200:
+ result = categories.GROSS * 0.22
+else:
+ result = (44 + (categories.GROSS - 200) * 0.15)"
+az_erui,İşə götürən işsizlik sığortası (0.5%),ERUI,Company Contribution,percentage,none,"
+                    result = rules.NET > categories.NET * 0.10",211,"
+                    result = contract.wage * 0.10"

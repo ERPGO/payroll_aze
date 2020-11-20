@@ -30,7 +30,9 @@
     'data': [
 #         'security/ir.model.access.csv',
         'views/hr_contract.xml',
-        'views/hr_employee.xml'
+        'views/hr_employee.xml',
+        'data/hr_salary_rule_category.xml',
+        'data/hr.salary.rule.csv',
     ],
     # only loaded in demonstration mode
     'demo': [
