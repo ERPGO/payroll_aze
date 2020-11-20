@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+		<record id="dosttech_view_hr_payslip_form_inherit" model="ir.ui.view">
+			<field name="name">HR Payslip form inherit</field>
+			<field name="model">hr.payslip</field>
+			<field name="inherit_id" ref="hr_payroll_community.view_hr_payslip_form"/>
+			<field name="arch" type="xml">
+                <data>
+                  <xpath expr="//field[@name='credit_note']" position="after">
+                    <field name="working_days"/>
+                  </xpath>
+                </data>
+			</field>
+		</record>
+  </data>
+</odoo>
