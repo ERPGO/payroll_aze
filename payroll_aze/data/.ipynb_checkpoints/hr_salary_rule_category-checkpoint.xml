@@ -1,9 +1,0 @@
-<odoo>
-    <data>
-        <record id="GROSS_SCK" model="hr.salary.rule.category">
-            <field name="name">Gross for sick leave calculation</field>
-            <field name="code">GROSS_SCK</field>
-            <field name="note">Gross for sick leave calculation</field>
-        </record>
-    </data>
-</odoo>

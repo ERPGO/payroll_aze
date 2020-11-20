@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="aze_non_oil" model="hr.payroll.structure">
+            <field name="name">Base structure for Non-Oil/Non-Public companies</field>
+            <field name="code">BASE_NON_OIL</field>
+            <field name="parent_id" eval="False" />
+            <field name="rule_ids" eval="[(6, 0, [
+                                         ref('payroll_aze.az_basic'),
+                                         ref('payroll_aze.az_toff'),
+                                         ref('payroll_aze.az_sck'),
+                                         ref('payroll_aze.az_lfi'),
+                                         ref('payroll_aze.az_gross'),
+                                         ref('payroll_aze.az_gross_sck'),
+                                         ref('payroll_aze.az_tax'),
+                                         ref('payroll_aze.az_eepen'),
+                                         ref('payroll_aze.az_eeui'),
+                                         ref('payroll_aze.az_net'),
+                                         ref('payroll_aze.az_erspf'),
+                                         ref('payroll_aze.az_erui')
+                                         ])]"/>
+        </record>
+    </data>
+</odoo>

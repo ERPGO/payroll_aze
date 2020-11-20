@@ -22,8 +22,9 @@
     # any module necessary for this one to work correctly
     'depends': [
                 'base', 
+                'contacts', 
                 'hr_worked_days',
-                'hr_payslip_monthly_report'
+                'hr_payslip_monthly_report',
                 ],
 
     # always loaded
@@ -31,8 +32,11 @@
 #         'security/ir.model.access.csv',
         'views/hr_contract.xml',
         'views/hr_employee.xml',
+        'data/res_partner.xml',
+        'data/hr_contribution_register.xml',
         'data/hr_salary_rule_category.xml',
         'data/hr.salary.rule.csv',
+        'data/hr_salary_structure.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

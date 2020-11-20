@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="aze_tax_service" model="res.partner">
+            <field name="name">İqtisadiyyat Nazirliyi yanında Dövlət Vergi Xidməti</field>
+            <field name="company_type">company</field>
+            <field name="street">L.Landau küçəsi</field>
+            <field name="city">Bakı</field>
+            <field name="zip">AZ1073</field>
+            <field name="email">office@taxes.gov.az</field>
+            <field name="phone">+994 12 403 89 70</field>
+            <field name="website">https://www.taxes.gov.az</field>
+            <field name="country_id" ref="base.az"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="aze_tax_register" model="hr.contribution.register">
+            <field name="name">Dövlət Vergi Xidməti</field>
+            <field name="partner_id" ref="payroll_aze.aze_tax_service"/>
+        </record>
+    </data>
+</odoo>
